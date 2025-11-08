@@ -94,7 +94,8 @@
 <body>
 <div class="container">
     <h1>Welcome to Bible Study Web Portal ✝️</h1>
-    <h2>Glad to see you here, <span th:text="${#authentication.name}">User</span>!</h2>
+    <h2>Glad to see you here, <span th:text="${username}">User</span>!</h2>
+
 
     <div class="verse-box" th:if="${verse != null}">
         <h3>🌤 Verse of the Day</h3>
