@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Note ✏️</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fbf5ed;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 700px;
+            margin: 80px auto;
+            background-color: #fff9f1;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #3b2e1e;
+            margin-bottom: 25px;
+        }
+
+        input[type="text"], textarea {
+            width: 85%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fffdf8;
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        button {
+            background-color: #d4af37;
+            color: white;
+            font-weight: bold;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #c19e34;
+        }
+
+        a {
+            color: #3b2e1e;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Edit Your Note ✏️</h1>
+    <form th:action="@{'/notes/update/' + ${note.id}}" method="post" th:object="${note}">
+        <input type="text" th:field="*{title}" placeholder="Note title" required><br>
+        <textarea th:field="*{content}" placeholder="Update your note here..." required></textarea><br>
+        <button type="submit">Update Note</button>
+    </form>
+    <a href="/notes">← Back to Notes</a>
+</div>
+</body>
+</html>

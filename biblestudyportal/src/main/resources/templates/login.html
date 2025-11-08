@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login - Bible Study Web Portal ✝️</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fbf5ed;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            margin: 100px auto;
+            background-color: #fff9f1;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #3b2e1e;
+            margin-bottom: 25px;
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
+        input[type="email"], input[type="password"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            background-color: #fffdf8;
+        }
+
+        button {
+            background-color: #d4af37;
+            color: white;
+            font-weight: bold;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #c19e34;
+        }
+
+        .register-link {
+            margin-top: 20px;
+            display: block;
+            font-weight: 600;
+        }
+
+        .register-link a {
+            color: #d4af37;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .error {
+            color: #b03a2e;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Welcome Back ✝️</h1>
+
+    <div th:if="${param.error}" class="error">
+        Invalid email or password. Please try again.
+    </div>
+
+    <form th:action="@{/login}" method="post">
+        <input type="email" name="username" placeholder="Enter your email" required><br>
+        <input type="password" name="password" placeholder="Enter your password" required><br>
+        <button type="submit">Login</button>
+    </form>
+
+    <div class="register-link">
+        Don’t have an account? <a href="/register">Register here</a>
+    </div>
+</div>
+</body>
+</html>

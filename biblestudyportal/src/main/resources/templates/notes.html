@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Bible Notes ✝️</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fbf5ed;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 60px auto;
+            background-color: #fff9f1;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #3b2e1e;
+            margin-bottom: 20px;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        input[type="text"], textarea {
+            width: 80%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            background-color: #fffdf8;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        button {
+            background-color: #d4af37;
+            color: white;
+            font-weight: bold;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #c19e34;
+        }
+
+        .notes-list {
+            margin-top: 20px;
+        }
+
+        .note-card {
+            background-color: #f9f3e9;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .note-title {
+            font-weight: bold;
+            font-size: 18px;
+            color: #3b2e1e;
+        }
+
+        .note-content {
+            color: #5c4b34;
+            margin: 8px 0;
+        }
+
+        .note-time {
+            color: #a58e6f;
+            font-size: 13px;
+        }
+
+        .delete-btn {
+            float: right;
+            color: white;
+            background-color: #b03a2e;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 10px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .delete-btn:hover {
+            background-color: #922b21;
+        }
+
+        .edit-btn {
+            float: right;
+            margin-right: 10px;
+            background-color: #3b5998;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .edit-btn:hover {
+            background-color: #2e4373;
+        }
+
+        .nav-links {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .nav-links a {
+            color: #d4af37;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>My Bible Study Notes ✍️</h1>
+
+    <form th:action="@{/notes/add}" method="post" th:object="${note}">
+        <input type="text" th:field="*{title}" placeholder="Note title" required /><br>
+        <textarea th:field="*{content}" placeholder="Write your note here..." required></textarea><br>
+        <button type="submit">Add Note</button>
+    </form>
+
+    <div class="notes-list">
+        <div th:each="n : ${notes}" class="note-card">
+            <span class="note-title" th:text="${n.title}"></span>
+
+            <a th:href="@{'/notes/edit/' + ${n.id}}" class="edit-btn">Edit</a>
+
+            <form th:action="@{'/notes/delete/' + ${n.id}}" method="get" style="display:inline;">
+                <button class="delete-btn" type="submit">Delete</button>
+            </form>
+            <p class="note-content" th:text="${n.content}"></p>
+            <p class="note-time" th:text="${#temporals.format(n.createdAt, 'dd MMM yyyy HH:mm')}"></p>
+        </div>
+    </div>
+
+    <div class="nav-links">
+        <a href="/home">🏠 Home</a> |
+        <a href="/logout">🚪 Logout</a>
+    </div>
+</div>
+</body>
+</html>
